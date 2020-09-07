@@ -1,0 +1,89 @@
+{
+	sender:
+	reciver:
+	msg:
+	date:
+	
+}
+
+
+<div class="outgoing_msg">
+  <div class="sent_msg">
+    <p>{{data}}</p>
+    <span class="time_date">{{date}}</span> </div>
+</div>            
+
+<div class="incoming_msg">
+<div class="received_msg">
+  <div class="received_withd_msg">
+    <p>{{message}}</p>
+    <span class="time_date">{{date}}</span>
+  </div>
+</div>
+</div>
+
+<div class="type_msg">
+            <div class="input_msg_write">
+              <input type="text" class="write_msg" placeholder="Type a message"/>
+              <button class="msg_send_btn" type="submit">Send</button>
+            </div>
+          </div>
+messages.find({
+	$or:[
+	{
+		$and:[
+			{
+				from:'7tAvgoMv5DZewwhF2'
+			},
+			{
+				to:'dm6AFLotjXmjnRQBw'
+			}
+		]
+	},
+	{
+		$and:[
+			{
+				to:'7tAvgoMv5DZewwhF2'
+			},
+			{
+				from:'dm6AFLotjXmjnRQBw'
+			}
+		]
+	}
+	]
+},{sort: {date: 1}}).fetch()
+
+
+5ZnpEeuunCjMhFca4 dm6AFLotjXmjnRQBw
+var temp = messages.find({
+	$or:[
+	{
+		$and:[
+			{
+				from:Meteor.userId()
+			},
+			{
+				to:id
+			}
+		]
+	},
+	{
+		$and:[
+			{
+				to:Meteor.userId()
+			},
+			{
+				from:id
+			}
+		]
+	}
+	]
+},{sort: {date: -1},limit:1}).fetch();
+
+
+
+
+
+
+
+
