@@ -29,24 +29,24 @@
             </div>
           </div>
 messages.find({
-	$or:[
+	$and:[
 	{
 		$and:[
 			{
-				from:'7tAvgoMv5DZewwhF2'
+				from:
 			},
 			{
-				to:'dm6AFLotjXmjnRQBw'
+				to:
 			}
 		]
 	},
 	{
 		$and:[
 			{
-				to:'7tAvgoMv5DZewwhF2'
+				to:
 			},
 			{
-				from:'dm6AFLotjXmjnRQBw'
+				from:
 			}
 		]
 	}

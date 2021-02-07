@@ -1,5 +1,5 @@
-<body>
-    {{>chatapp}}
+<body class="back">
+  {{> navbar}}    
 </body>
 
 <template name="chatapp">
@@ -8,20 +8,6 @@
   <title>Chatapp</title>
 </head>
 <body>
-  <ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link active" href="#">Home</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" style="color: black;" href="#">Find Friend</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" style="color: black;" href="#">pending requests</a>
-  </li>
-  <li class="nav-item navbar-right">
-    <a class="nav-link float-right" style="color: black; text-decoration: none;" href="#">{{> loginButtons}}</a>
-  </li>
-</ul>
 <div class="alert alert-primary log" role="alert"></div>
 <div class="container">
 <div class="messaging">
@@ -29,35 +15,28 @@
         <div class="inbox_people">
           <div class="headind_srch">
             <div class="recent_heading">
-              <h4>Recent</h4>
+              <h4>Friends List</h4>
             </div>
-            <div class="srch_bar">
-              <div class="stylish-input-group">
-                <input type="text" class="search-bar"  placeholder="Search" >
-                <span class="input-group-addon">
-                <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
-                </span> </div>
-            </div>
+            
           </div>
           <div class="inbox_chat">
             {{#each user_list}}
-              <div class="chat_list" id={{_id}}>
+              <div class="chat_list" id={{to}}>
                 <div class="chat_people">
                   <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
                   <div class="chat_ib">
-                    <h5>{{username}}</h5>
-                      {{#each call _id}}
+                    <h5>{{getname to}}</h5>
+                      {{#each call to}}
                       <h5><span class="chat_date" style="float: right;">{{setdate date}}</span></h5>
                       <p>{{message}}</p>
                     {{/each}}
-                    <p class="invisible" id="getdata" style="font-size: 2px;">{{_id}}</p>
                   </div>
                 </div>
               </div>
             {{/each}}
           </div>
         </div>
-            {{> chatmsgg}}        
+            {{> chatmsgg}}
       </div>
     </div>
   </div>
@@ -85,9 +64,6 @@
                   </div>
                 </div>
               </div>
-                        <script type="text/javascript">
-            $('.msg_history').scrollTop($('.msg_history')[0].scrollHeight);
-          </script>     
               {{/if}}
             {{/each}}
           </div>
@@ -100,3 +76,49 @@
           </div>
         </div>
 </template>
+
+<template name="findfriends">
+  <div class="container">
+    <div class="row">
+
+  {{#each finds}}
+  {{#if isvalid _id}}
+    {{#if isreject _id}}
+      <div class="col-md-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Username : {{username}}</h5>
+            <a href="#" class="btn btn-primary js-accept">Accept</a>
+            <a href="#" class="btn btn-primary js-reject">Reject</a>
+          </div>
+        </div>
+      </div>
+    {{/if}}
+  {{/if}}
+  {{/each}}
+  {{#if blank}}
+  <div id="dialog" title="Basic dialog">
+  <p style="align-content: center;position: absolute; font-size: 30px; padding: 20px;
+  border: 3px solid black;top: 50%; background-color: #ced4da;margin-left: 100px;">Sorry,still no user is registered or signup in chat application !!</p>
+  </div>
+  {{/if}}
+</div>
+  
+</div>
+</template>
+
+<template name="navbar">
+    <ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active home" href="/">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link frd" href="/find-friends">Find Friend</a>
+  </li>
+  <li class="nav-item navbar-right">
+    <a class="nav-link float-right" style="text-decoration: none;" href="#">{{> loginButtons}}</a>
+  </li>
+</ul>
+</template>
+
+
